@@ -7,9 +7,10 @@ specification, or just join us anytime in IRC at (#afkworks)*
 
 ### `KNPATH`
 
-The optional `KNPATH` environment variable contains one or more colon-delimited
-full paths to all knowledge bases for the current user account. 
+The optional `KNPATH` environment variable contains one or more
+colon-delimited full paths to all knowledge bases for the current user
+account. 
 
-The first knowledge base in the `KNPATH` must be considered the personal
+The first knowledge base in the `KNPATH` must be considered the default
 knowledge base for the current user (entity).
 
