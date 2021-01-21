@@ -52,6 +52,24 @@ the initial specification including the following:
 
 * Schedule
 
+#### `generate`
+
+By convention an optional `generate` script may be placed in each
+knowledge node. It's purpose is to generate static content from dynamic
+sources.
+
+While the `generate` script must never be executed by anyone but the
+node creator (being considered nothing more than a text file to anything
+else) it does provide localized insight into the origin and rendering of
+all data within the node. For this reason it should always be included
+when possible.
+
+There are several practical uses for the `generate` script:
+
+* Generate portions `README.md` file from the contained YAML data
+* Generate YAML data from external data sources
+* Produce CSV and other views of data queries
+
 ## Simplified Pandoc Markdown
 
 Simplified Pandoc Markdown is a subset of full Pandoc Markdown and a
