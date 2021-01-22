@@ -14,9 +14,52 @@ account.
 The first knowledge base in the `KNPATH` must be considered the default
 knowledge base for the current user (entity).
 
+## Knowledge Bases
+
+A Knowledge Base *is* the root level knowledge node which optionally
+contains one or more other nodes recursively (like a typical directory
+tree structure).
+
+### Files
+
+A Knowledge Base contains the following files within its root node
+directory:
+
+Name|Summary|Required
+-|-|-
+`README.md`|root node and cover|required
+`MANIFEST`|node refs with seconds by last changed|required
+json - searchable summary in JSON
+subs - subscription recommendations and warnings
+words - every single word, count, and node containing (JSON)
+<node>/ - node subdirectories or other subdirectories
+dex/ - reserved (optional) base index node
+dex/json - rendered base index data
+
+
+
 ## Knowledge Nodes
 
 ### Files
+
+Name|Summary|Required
+-|-|-
+`README.md`|simplified Pandoc Markdown|required
+`data.yml`|simplified YAML structured data|optional but conventional
+`generate`|static content generator script|optional
+
+Knowledge nodes can contain any files but consideration should be given
+to the fact that others will be replicating them as a part of federated
+knowledge base sharing. Therefore, large files should be avoided at all
+costs and emphasis should be on textual content, knowledge source.
+
+The file types will usually be:
+
+* Simplified Pandoc Markdown
+* Simplified YAML Structured Data
+* Compressed Raster Image Formats
+* Scalable Vector Images
+* Generator Scripts 
 
 #### `README.md`
 
@@ -97,3 +140,20 @@ requires several specific constraints to address this:
 
 Keep in mind that the sometimes problematic `yes` and `no` Boolean
 values are still a part of Simplified YAML.
+
+## Reserved Command Line Utility Names
+
+* `keg` - utility for sharing on KEG
+* `kn` - utility for managing local knowledge base
+
+## Formerly Known As
+
+Here are some fun and official naming considerations over the years:
+
+* Universal Knowledge Transfer Service (UKNTS)
+* Knowledge Universal Transfer Service (KNUTS)
+* Federated Universal Knowledge Network (FUKN)
+* Universal Federated Knowledge Database (FUKD)
+* The Knowledge Net
+* README World Exchange
+* The Essential Web
