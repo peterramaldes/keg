@@ -68,18 +68,52 @@ The `README.md` file contains free-form [Simplified Pandoc Markdown].
 #### YAML Files
 
 A single knowledge node may contain one or more YAML files. Data from
-all YAML files must be in [Simplified YAML Format] and is effectively
-combined into a single `data` structure. This allows content maintainers
-to organize files in the most convenient manner to maintain "by hand."
+all YAML files must be in [Simplified YAML Format][]. Use of YAML files
+is designed to allow content maintainers the greatest flexibility
+without losing specificity in order to organize files in the most
+convenient manner to be maintained "by hand."
+
 Files may and should contain extensive use of visual whitespace and
 comments with the expectation and promise that these files will *only*
 be changed through the use of text editors used by humans. (JSON is used
 for everything else.)
 
-There is one exception, however. The `schema.yml` file (a reserved name)
-is expected to contain the YAML model schema specification if found.
+##### Default Data Structure 
+
+All YAML files that do *not* begin with three dashes are considered in
+the same single data structure as if the files had been concatenated
+together in no particular order before being parsed and loaded into
+memory. The default data structure must be named `Data` and is reserved.
+
+##### Separate Data Structures
+
+All YAML files beginning with three dashes (`---`) must be considered
+separate data structures with names that exactly match the portion of
+the file name up to, but not including, the first period (`.`). For
+example, a file named `2021-01-21_05:18:51.yml` containing a `Recorded`
+field would be as if the following YAML file were parsed:
+
+```yaml
+---
+2021-01-21_05-18-51: 
+  Recorded: 2021-01-21T05:18:51-0500
+```
+
+Separate data structure files do not need to be in [Simplified YAML Format][]
+and can contain whatever is allowed by YAML version 1.2. This allows
+them to specify a schema to which they comply if desired.
+
+##### Special `schema.yml` Root Node File
+
+A special `schema.yml` file (a reserved name) may be placed in the root
+node to contain one or more YAML model schema specifications if found.
 This allows node creators to specify their own domain models in addition
-to those already put forth by the standard.
+to those already put forth by the standard. To use the schemas therein,
+simply use the triple-dash form of YAML in each node and specify the
+schema being used per the YAML standard.
+
+The default 'Data' structure (no dashes) does not comply to any specific
+schema other than simplified YAML itself.
 
 ##### `data.yml`
 
