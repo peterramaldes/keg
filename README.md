@@ -117,17 +117,7 @@ schema other than simplified YAML itself.
 
 ##### `data.yml`
 
-Conventional name for main data in [Simplified YAML Format].
-
-#### `schema.yml`
-
-Optional schema specification of the `data.yml` using full YAML schema
-notation.
-
-Many standard schemas are expected to be a standard part of
-the initial specification including the following:
-
-* Schedule
+Conventional name for main data in [Simplified YAML Format][].
 
 #### `generate`
 
@@ -171,6 +161,8 @@ requires several specific constraints to address this:
 
 * No `---` or `...`
 * No linking
+* Add text assumed to be [Simplified Pandoc Markdown][] (therefore,
+  the `|` operator is preferred for long text blocks over `>`).
 
 Keep in mind that the sometimes problematic `yes` and `no` Boolean
 values are still a part of Simplified YAML.
