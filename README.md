@@ -137,6 +137,25 @@ There are several practical uses for the `generate` script:
 * Generate YAML data from external data sources
 * Produce CSV and other views of data queries
 
+## Universal Resource Identifiers
+
+Since any network protocol --- or no protocol --- can be used to access
+any KEG base the only unique identifier required is a domain name
+(including subdomains). It is expected (but not required) that the KEG
+creator and/or maintainer will have administrative access to the domain
+in order to add the required TXT record. If not, the KEG will remain
+*unvalidated* but will still be usable.
+
+```pegn
+KEGURI <-- 'keg://' Domain (':' Port) Path'
+```
+A KEG URI is identical in format to one for the Web but instead of
+assuming port 80 or 443 any *other* port that is available will be
+scanned using multiple methods to obtain the `keg.yml` file. Since KEG
+is designed to leverage the existing Web infrastructure HTTP over 443
+will be attempted first, then HTTP over 80 (exactly the same as
+`https://` and `http://`). 
+
 ## Simplified Pandoc Markdown
 
 Simplified Pandoc Markdown is a subset of full Pandoc Markdown and a
