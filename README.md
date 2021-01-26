@@ -1,27 +1,25 @@
-# Specification for Federated Knowledge Bases
+# KEG, The Knowledge Exchange Grid (Graph)
 
 *Join us Fridays on <https://rwxrob.live> as we hash out this
 specification, or just join us anytime in IRC at (#afkworks)*
 
 ## Reserved Environment Variables
 
-Knowledge workers can quickly change roles/contexts, enabling them to
-work productively on different KEG knowledge bases, by simply changing a
-single environment variable. This flexibility allows work to be done
-from a single computer account as well as facilitates searches and other
-work that might apply to all KEG knowledge bases that given worker
-maintains daily.
+Knowledge workers can quickly change roles/contexts by changing a single
+environment variable enabling them to work productively with different
+local knowledge nodes throughout the day. This flexibility allows work
+to be done from a single computer account as well as facilitates
+searches and other work that might apply to all local nodes.
 
-### `KEG`
+### `KN`
 
-The `KEG` environment variable contains the full path to the current
-active KEG knowledge base (more precisely, its root knowledge node).
-This allows context to be changed for the entire session or just for a
-single command.
+The `KN` environment variable contains the full path to the current
+local root knowledge node. This allows context to be changed for the
+entire session or just for a single command.
 
 ```bash
 # start a new bash shell with given KEG context 
-KEG=$REPOS/github.com/rwxrob/rwxrob exec bash
+KN=$REPOS/github.com/rwxrob/rwxrob exec bash
 
 # just run a log script for the given context
 KEG=$REPOS/github.com/skilstak/keg log
@@ -36,8 +34,8 @@ This approach borrows heavily from the successful model used by `sudo`.
 ### `KEGPATH`
 
 The optional `KEGPATH` environment variable contains one or more
-colon-delimited full paths to all knowledge bases for the current user
-account. 
+colon-delimited full paths to all local knowledge nodes for the current
+user account. 
 
 ## Knowledge Bases
 
@@ -77,9 +75,9 @@ Name|Summary|Required
 `generate`|static content generator script|optional
 
 Knowledge nodes can contain any files but consideration should be given
-to the fact that others will be replicating them as a part of federated
-knowledge base sharing. Therefore, large files should be avoided at all
-costs and emphasis should be on textual content, knowledge source.
+to the fact that others will be replicating them if shared. Therefore,
+large files should be avoided at all costs and emphasis should be on
+textual content, knowledge source.
 
 The file types will usually be:
 
@@ -168,23 +166,23 @@ There are several practical uses for the `generate` script:
 ## Universal Resource Identifiers
 
 Since any network protocol --- or no protocol --- can be used to access
-any KEG base the only unique identifier required is a domain name
-(including subdomains). It is expected (but not required) that the KEG
-creator and/or maintainer will have administrative access to the domain
-in order to add the required TXT record. If not, the KEG will remain
-*unvalidated* but will still be usable.
+any KEG node the only unique identifier required is a domain name
+(including subdomains) and the dotted Node identifier. It is expected
+(but not required) that the KEG creator and/or maintainer will have
+administrative access to the domain in order to add the required TXT
+record. If not, the KEG node will remain *unvalidated* but will still be
+usable.
 
 ```pegn
-KEGURI <-- 'keg://' Domain (':' Port) Path'
+KEGURI <-- 'keg:' Node ('@' Domain)?
+Node   <-- (!'.' visible)+ ('.' (!'.' visible)+)*
 ```
-A KEG URI is identical in format to one for the Web but instead of
-assuming port 80 or 443 any *other* port that is available will be
-scanned using multiple methods to obtain the `keg.yml` file. The URI is
-less important than the existence of this essential file.
 
-Since KEG is designed to leverage the existing Web infrastructure HTTP
-over 443 will be attempted first, then HTTP over 80 (exactly the same as
-`https://` and `http://`). 
+Example:
+
+```
+keg:md.lang@rwx.gg
+```
 
 ## Simplified Pandoc Markdown
 
@@ -218,8 +216,18 @@ values are still a part of Simplified YAML.
 
 ## Reserved Command Line Utility Names
 
-* `keg` - utility for sharing on KEG
-* `kn` - utility for managing local knowledge base
+* `keg` - utility for packaging and sharing on the KEG
+* `kn` - utility for managing local knowledge nodes
+
+```
+# query a node on the KEG
+keg tap best.beers  
+keg tap best.beers@rwx.gg
+eval $(keg _bash)
+eval $(kn _bash)
+complete -C kn kn
+complete -C keg keg
+```
 
 ## Formerly Known As
 
@@ -232,3 +240,23 @@ Here are some fun and official naming considerations over the years:
 * The Knowledge Net
 * README World Exchange
 * The Essential Web
+
+## FAQ
+
+### What is the difference between "keg" and "kn"?
+
+The term "keg" always refers to the sharing network on which a "kn"
+(knowledge node) is shared. 
+
+### What is the difference between a "KEG node" and a "knowledge node"?
+
+A KEG node is a knowledge node that is shared on the KEG. Knowledge
+nodes can exist locally without ever being shared. A KEG node must be
+shared to be called such.
+
+### Why not "knowledge base"?
+
+Because the term is inaccurate. The word "base" implied it can't be
+further composed or otherwise combined. Therefore, the best and most
+accurate term is "knowledge node" even if a single node is a root node
+shared over KEG.
