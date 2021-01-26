@@ -5,14 +5,39 @@ specification, or just join us anytime in IRC at (#afkworks)*
 
 ## Reserved Environment Variables
 
-### `KNPATH`
+Knowledge workers can quickly change roles/contexts, enabling them to
+work productively on different KEG knowledge bases, by simply changing a
+single environment variable. This flexibility allows work to be done
+from a single computer account as well as facilitates searches and other
+work that might apply to all KEG knowledge bases that given worker
+maintains daily.
 
-The optional `KNPATH` environment variable contains one or more
+### `KEG`
+
+The `KEG` environment variable contains the full path to the current
+active KEG knowledge base (more precisely, its root knowledge node).
+This allows context to be changed for the entire session or just for a
+single command.
+
+```bash
+# start a new bash shell with given KEG context 
+KEG=$REPOS/github.com/rwxrob/rwxrob exec bash
+
+# just run a log script for the given context
+KEG=$REPOS/github.com/skilstak/keg log
+```
+
+Scripts and the `keg` and/or `kn` helper utilities should be aware of
+the `KEG` (and optionally `KEGPATH`) variables. Anything else related to
+those KEGs should be loaded from `keg.yml` within each.
+
+This approach borrows heavily from the successful model used by `sudo`.
+
+### `KEGPATH`
+
+The optional `KEGPATH` environment variable contains one or more
 colon-delimited full paths to all knowledge bases for the current user
 account. 
-
-The first knowledge base in the `KNPATH` must be considered the default
-knowledge base for the current user (entity).
 
 ## Knowledge Bases
 
@@ -27,16 +52,18 @@ directory:
 
 Name|Summary|Required
 -|-|-
+`keg.yml`|master key YAML file|required
 `README.md`|root node and cover|required
 `MANIFEST`|node refs with seconds by last changed|required
+
+<!-- TODO need to get better alternatives to these
 json - searchable summary in JSON
 subs - subscription recommendations and warnings
 words - every single word, count, and node containing (JSON)
 <node>/ - node subdirectories or other subdirectories
 dex/ - reserved (optional) base index node
 dex/json - rendered base index data
-
-
+-->
 
 ## Knowledge Nodes
 
@@ -46,6 +73,7 @@ Name|Summary|Required
 -|-|-
 `README.md`|simplified Pandoc Markdown|required
 `data.yml`|simplified YAML structured data|optional but conventional
+`*.yml`|more YAML data|optional
 `generate`|static content generator script|optional
 
 Knowledge nodes can contain any files but consideration should be given
@@ -151,9 +179,11 @@ KEGURI <-- 'keg://' Domain (':' Port) Path'
 ```
 A KEG URI is identical in format to one for the Web but instead of
 assuming port 80 or 443 any *other* port that is available will be
-scanned using multiple methods to obtain the `keg.yml` file. Since KEG
-is designed to leverage the existing Web infrastructure HTTP over 443
-will be attempted first, then HTTP over 80 (exactly the same as
+scanned using multiple methods to obtain the `keg.yml` file. The URI is
+less important than the existence of this essential file.
+
+Since KEG is designed to leverage the existing Web infrastructure HTTP
+over 443 will be attempted first, then HTTP over 80 (exactly the same as
 `https://` and `http://`). 
 
 ## Simplified Pandoc Markdown
