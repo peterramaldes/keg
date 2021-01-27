@@ -216,8 +216,16 @@ values are still a part of Simplified YAML.
 
 ## Reserved Command Line Utility Names
 
-* `keg` - utility for packaging and sharing on the KEG
-* `kn` - utility for managing local knowledge nodes
+Reserved Name|Usage
+-|-
+`keg`|An knowledge package manager and sharing utility build and managed under
+the KEG initiative.
+`kn`|A reserved name for a local knowledge management utility command or
+script to be created and used however the knowledge worker wants on
+their local system. It's expected that hundreds or millions of different
+`kn` tools will exist depending on the specific needs of the worker. A
+base Bash `kn` script will be managed under the KEG initiative, but it
+by no means required.
 
 ```
 # query a node on the KEG
