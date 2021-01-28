@@ -173,15 +173,22 @@ administrative access to the domain in order to add the required TXT
 record. If not, the KEG node will remain *unvalidated* but will still be
 usable.
 
+If an optional `jq` query is supplied the resulting raw JSON will be
+implied in the return. By convention all KEG Node data keys are always
+initial capitalized. This allows them to be distinguished from the node
+path itself, which always has initial lowercase.
+
 ```pegn
-KEGURI <-- 'keg:' Node ('@' Domain)?
+KEGURI <-- 'keg:' Node JQ? ('@' Domain)?
 Node   <-- (!'.' visible)+ ('.' (!'.' visible)+)*
+JQ     <-- # jq query 
 ```
 
-Example:
+Examples:
 
 ```
 keg:md.lang@rwx.gg
+keg:md.lang.Summary@rwx.gg
 ```
 
 ## Simplified Pandoc Markdown
