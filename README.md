@@ -179,9 +179,9 @@ initial capitalized. This allows them to be distinguished from the node
 path itself, which always has initial lowercase.
 
 ```pegn
-KEGURI <-- 'keg:' Node JQ? ('@' Domain)?
+KEGURI <-- 'keg:' Node Query? ('@' Domain)?
 Node   <-- (!'.' visible)+ ('.' (!'.' visible)+)*
-JQ     <-- # jq query 
+Query     <-- # jq limited query
 ```
 
 Examples:
