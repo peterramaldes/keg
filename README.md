@@ -94,10 +94,11 @@ The `README.md` file contains free-form [Simplified Pandoc Markdown].
 #### YAML Files
 
 A single knowledge node may contain one or more YAML files. Data from
-all YAML files must be in [Simplified YAML Format][]. Use of YAML files
-is designed to allow content maintainers the greatest flexibility
-without losing specificity in order to organize files in the most
-convenient manner to be maintained "by hand."
+all YAML files must be in [Simplified YAML
+Format](#simplified-yaml-format). Use of YAML files is designed to allow
+content maintainers the greatest flexibility without losing specificity
+in order to organize files in the most convenient manner to be
+maintained "by hand."
 
 Files may and should contain extensive use of visual whitespace and
 comments with the expectation and promise that these files will *only*
@@ -125,9 +126,10 @@ field would be as if the following YAML file were parsed:
   Recorded: 2021-01-21T05:18:51-0500
 ```
 
-Separate data structure files do not need to be in [Simplified YAML Format][]
-and can contain whatever is allowed by YAML version 1.2. This allows
-them to specify a schema to which they comply if desired.
+Separate data structure files do not need to be in [Simplified YAML
+Format](#simplified-yaml-format)] and can contain whatever is allowed by
+YAML version 1.2. This allows them to specify a schema to which they
+comply if desired.
 
 ##### Special `schema.yml` Root Node File
 
@@ -143,7 +145,8 @@ schema other than simplified YAML itself.
 
 ##### `data.yml`
 
-Conventional name for main data in [Simplified YAML Format][].
+Conventional name for main data in [Simplified YAML
+Format](#simplified-yaml-format).
 
 #### `generate`
 
@@ -215,8 +218,9 @@ requires several specific constraints to address this:
 
 * No `---` or `...`
 * No linking
-* Add text assumed to be [Simplified Pandoc Markdown][] (therefore,
-  the `|` operator is preferred for long text blocks over `>`).
+* Add text assumed to be [Simplified Pandoc
+  Markdown](#simplified-pandoc-markdown) (therefore, the `|` operator
+  is preferred for long text blocks over `>`).
 
 Keep in mind that the sometimes problematic `yes` and `no` Boolean
 values are still a part of Simplified YAML.
